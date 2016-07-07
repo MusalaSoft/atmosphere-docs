@@ -6,10 +6,7 @@ we need to extract the libraries from your local Android SDK installation first.
 ## Requirements
 
 ### Android SDK
-If you already have Android Studio installed, most likely you also have Android SDK. If you don't have a local Android SDK installation, you can download it from [here][2].
-You don't need the whole bundle, so look for files whose names start with `android-sdk_` and choose the one appropriate for your system. Extract the archive to a suitable location after the download is complete.
-
-Start the SDK Manager and make sure you have the following components installed:
+You will need the following components installed:
 
  * **Android SDK Tools**
  * **Android SDK Platform-tools**
@@ -19,6 +16,7 @@ Start the SDK Manager and make sure you have the following components installed:
    * **Google APIs**
    * **Glass Development Kit Preview**
 
+You can find more info on how to install and configure the Android SDK [here][2].
 ### Set ANDROID_HOME
 After the Android SDK is ready to use, you need to set a system path variable pointing to the Android SDK directory.
 
@@ -36,12 +34,12 @@ After the Android SDK is ready to use, you need to set a system path variable po
 Currently the tool depends on Maven, so you must have Maven installed. Installation instructions can be found [here][3], but keep an eye on the Maven Android SDK Deployer documentation as these requirements might change in the future.
 
 ## Usage
-Download the Maven Android SDK Deployer from the GitHub repository (or clone it): [Maven Android SDK Deployer][1].
+Download the Maven Android SDK Deployer from the GitHub repository (or `git clone` it): [Maven Android SDK Deployer][1].
 
 For the ATMOSPHERE projects you only need to export `v4.4.2` of the library. This can be done by running the command `mvn install -P 4.4` in the root directory of the Maven Android SDK Deployer.
 
 If the build is successful, you are all set.
 
 [1]: https://github.com/simpligility/maven-android-sdk-deployer
-[2]: https://developer.android.com/studio/index.html#downloads
+[2]: android_sdk.md
 [3]: maven.md
