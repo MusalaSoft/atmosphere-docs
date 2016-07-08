@@ -16,6 +16,37 @@ Here is a short list of mobile specific things that can be tested with our frame
 
 We really believe we provide a product focused primarily on the specifics of mobile testing, allowing for automating all these weird scenarios that you can not test with any contemporary testing tool. We have already succeeded automating a lot greater percentage of the test scenarios for our own mobile applications than what we were able beforehand.
 
+## Topology
+The ATMOSPHERE mobile testing framework consists of 4 main topological parts:
+
+### Agent
+The agent is responsible for establishing and maintaining the connection with specific devices. It acts as a middleman between the server and the mobile devices. The project of the agent is implemented as Java Project and consists of the following projects:
+ * atmosphere-agent
+ * atmosphere-server-agent-lib
+ * atmosphere-agent-device-lib
+ * atmosphere-commons
+
+### Server
+This is the interface the clients speak to. It establishes connections to agents and uses their set of devices to serve client requests. It is the part of the project that defines the methods exposed to the end clients. The project of the server is implemented as Java Project and consists of the following projects:
+* atmosphere-server
+* atmosphere-server-agent-lib
+* atmosphere-client-server-lib
+* atmosphere-commons
+
+The code is developed in such a way that the server does not necessarily live on the same machine the agent does.
+
+### Client
+The client is the library that exposes the Atmosphere framework to the application testers.
+The tests that declare the atmosphere-client library as a dependency do not need to run on the same machine as the server.
+
+### Target devices
+The target device is the place where the actual execution of the code happens. The target devices can be either real mobile devices or software Android emulators. Keep in mind that some tests are executable only on emulators as some manipulations are not possible on actual devices.
+
+The code that needs to be deployed on the device is separated in multiple applications:
+ * **atmosphere-service** - this is the basic android application that runs an Android service establishing socket connection between the agent and the target device.
+ * **atmosphere-ime** - this is a small android application that is a simple implementation of input keyboard for Android. It is needed in order to make sure we can execute the tests requiring text input.
+ * **atmosphere-uiautomator-bridge** - this is a special project that is not deployed as a proper Android project. It is a Java library and it provides some missing Android classes on older Android API levels and an additional socket for communication between the agent and the target device. When it is deployed on the target device, the agent can recognize the service and connect to its socket.
+
 ## ATMOSPHERE Tests
 The Atmosphere tests are extended JUnit tests. Because of this Atmosphere can also be integrated with  [TestNG][1], in a way JUnit is. The classes with test methods are annotated with Atmosphere annotation (`@Server`) , which defines the properties of the server connection. The Atmosphere test methods must be annotated with the JUnit `@Test` annotation. Executing Atmosphere tests is done like running JUnit tests.
 
@@ -27,7 +58,7 @@ The Atmosphere tests are extended JUnit tests. Because of this Atmosphere can al
 1. Add JUnit library to the build path of this project.
     * To do that, go to `Build Path` -> `Configure Build Path` again. In the `Libraries` tab click on `Add Library` and then select `JUnit`. Click next, select the latest version of JUnit and click on `Finish`.
 
-### Creating an ATMOSPHERE Test Class
+### Creating an ATMOSPHERE test class
 1. Create a new class (for this example let's name it `AtmosphereTestCase`)
 1. Add a `@Server` annotation to the `AtmosphereTestCase` class. (The annotation is located in the `atmosphere-client` library). The annotation is used for connection with the Atmosphere server. For example:
 
@@ -40,7 +71,7 @@ public class AtmosphereHelloWorldTest {...}
  - **port** - integer, representing the port in the server's address
  - **connectionRetryLimit** - integer, representing the numbers of retries which should be made in case the connection with the Server breaks.
 
-### Creating an ATMOSPHERE Test Case
+### Creating an ATMOSPHERE test case
 Atmosphere test cases are methods, annotated with the JUnit `@Test` annotation where the Atmosphere Client API is used.
 
 #### Lifecycle of an ATMOSPHERE test
@@ -197,7 +228,11 @@ public class AtmosphereSampleTest {
 }
 ```
 
-### Running an ATMOSPHERE Test Case
+#### More examples
+More usage scenarios are available [here][2]
+
+### Running an ATMOSPHERE test case
 Running Atmosphere Test cases is done in the same way as running any other JUnit test case. You should right click on the test class. Click on `Run As` -> `JUnit Test Case` or `Run As` -> `Run Configurations` and select the proper configurations for a JUnit test.
 
 [1]: http://testng.org/
+[2]: usage/README.md
