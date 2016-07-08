@@ -1,1 +1,18 @@
-# atmosphere-docs
+# ATMOSPHERE mobile testing framework
+## Introduction
+Mobile software solutions become increasingly popular in the recent years. Software engineers have started being interested in improving the quality of their production long ago. Speaking of stability as one of the major points in the quality of a product, there are many techniques that are practiced nowadays in order to secure that the applications do not crash, and have no bugs. Most of them are in the sphere of different kinds of testing. Test automation is maybe the most beneficial approach for securing software robustness and identifying regressions. The goal is to prepare scripts that can be run over and over again and will secure the software quality. The preparation of these scripts takes longer than single round of manual test execution, but when one takes into account that these tests will be run multiple, sometime thousand of times, they really save a lot of effort and allow for more often bug check. There are many tools that help quality engineers automate tests. They have existed for a long while for desktop solutions and now we can say they have reached to the point of really high quality, profoundness and are easy to use. However, currently engineers try to apply almost the same approaches to mobile software. Musala Soft have been developing mobile solutions for several years now and we have identified that we are not able to automate the same test scenarios over and over again. Of course, we did manual testing where automation is not possible, but now we have come to a point where we think there should be a tool that would help us with automating such scenarios. We think such tool will not be beneficial just for us, but for any company that develops mobile software as the problems we are facing are common and raise from the environment in which such applications run.
+
+## Overview
+Atmosphere is a black-box testing framework for native Android applications. One of the advantages of our solution is that we do not need the code of the application being tested, it is sufficient to provide the installation file that is available on the markets of the certain mobile platform. Atmosphere is easy to integrate with other third party testing tools like TestNG and Selenium. The users (testers) can configure which tests are going to be executed on what kind of devices. They can also specify that some tests need to be run on multiple different in parameters devices simultaneously.
+Here is a short list of mobile specific things that can be tested with our framework:
+ * Resource exhaustion - mobile devices are still with more limited hardware parameters and thus they are a lot more easily subject to resource exhaustion, for example the device can run out of battery.
+ * Complex interactions - in scrollable views, time and date pickers, notification bar. The fact that smart phones go with touch screen displays allow for a lot more complex interaction with them. Using such interaction technique is far more intuitive to human beings, but is very hard to simulate using software, thus making testing a lot harder.
+ * Gestures - swiping, tapping, clear and input text.
+ * Complex selectors - elements on screen can be selected both with XPath and CSS expressions.
+ * Manipulation of hardware sensors such as position sensors (magnetic field) and motion sensors (device acceleration).
+ * Setting device orientation.
+ * Setting GPS coordinates.
+ * Checking WiFi connection, camera availability and GPS coordinates.
+ * Sending, receiving and answering calls.
+
+We really believe we provide a product focused primarily on the specifics of mobile testing, allowing for automating all these weird scenarios that you can not test with any contemporary testing tool. We have already succeeded automating a lot greater percentage of the test scenarios for our own mobile applications than what we were able beforehand.
