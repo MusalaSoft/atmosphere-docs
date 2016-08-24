@@ -1,6 +1,8 @@
 # ATMOSPHERE mobile testing framework
 ## Installation instructions
 The instructions for installation could be found [here](installation.md).
+## Quick start project
+Find it [here](#atmosphere-tests).
 ## Overview
 Atmosphere is a black-box testing framework for native Android applications. One of the advantages of our solution is that we do not need the code of the application being tested, it is sufficient to provide the installation file that is available on the markets of the certain mobile platform. Atmosphere is easy to integrate with other third party testing tools like TestNG and Selenium. The users (testers) can configure which tests are going to be executed on what kind of devices. They can also specify that some tests need to be run on multiple different in parameters devices simultaneously.
 Here is a short list of mobile specific things that can be tested with our framework:
