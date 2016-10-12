@@ -1,0 +1,18 @@
+# USAGE
+In this guide we cover how to use the basic capabilities of the ATMOSPHERE mobile testing framework.
+* [Active Screen Usage](active-screen.md)
+* [Calls and SMS Usage](calls-and-sms.md)
+* [Create Element Selector](create-element-selector.md)
+* [Create Xpath and CssQuery](create-xpath-and-cssquery.md)
+* [Date&Time Picker Usage](date-and-time-picker.md)
+* [Device Settings](device-settings.md)
+* [Gestures Usage](gestures.md)
+* [Get Children of Element](get-children.md)
+* [Get Device](get-device.md)
+* [Get Element](get-element.md)
+* [Notification Bar Usage](notification-bar.md)
+* [Scrollable View Usage](scrollable-view.md)
+* [Sensors Usage](sensors-usage.md)
+* [UiElement Usage](ui-element.md)
+* [Xml Dump](xml-dump.md)
+* [Debugging a Gradle project with Eclipse](gradle-debug-in-eclipse.md)
