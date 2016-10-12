@@ -1,7 +1,7 @@
 # Debugging a Gradle project with Eclipse
 
 #### Install Gradle
-You need to have `gradle` installed (where the Java program is running - the host machine)
+You will need to have [`gradle`](https://gradle.org/) installed.
 
 #### Setting up gradle debug configuration for all projects
 * Add this `init.gradle` file in your `$HOME/.gradle` directory:
@@ -36,7 +36,7 @@ You need to have `gradle` installed (where the Java program is running - the hos
   * Click `Apply`.
 
 #### Enable gradle Debug
- * For `test` task debugging run `$ gradle -DDEBUG=true test` on console.
- * For `run` task debugging run `$ gradle -DDEBUG=true run` on console.
+ * For `test` task debugging run `$ gradle -DDEBUG=true test` in the terminal.
+ * For `run` task debugging run `$ gradle -DDEBUG=true run` in the terminal.
 
-Now you can use your Eclipse debugger to debug ATMOSPHERE project.
+Now you can use your Eclipse debugger to debug an ATMOSPHERE project.

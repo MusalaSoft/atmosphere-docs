@@ -1,29 +1,25 @@
 ## Gestures ##
 
-Before executing a gesture on `UiElement`, testing device should be selected. For more information see
-[How to get device](get-device.md).
-Next step is to get the active screen from the selected device
+Before executing a gesture on a `UiElement`, a testing device should be selected. For more information see [How to get a device](get-device.md). The next step is to get the active screen from the selected device:
 ```java
    Screen screen = device.getActiveScreen();
 ```
-Now an `UiElement` can be picked. For the next example the clock on the desktop screen will be selected.
+Now a `UiElement` can be selected. In the next example the clock on the desktop screen will be selected.
 ```java
 UiElementSelector elementSelector = new UiElementSelector();
 elementSelector.addSelectionAttribute(CssAttribute.CLASS_NAME, "android.view.View");
 elementSelector.addSelectionAttribute(CssAttribute.PACKAGE_NAME, "com.android.deskclock");
 UiElement uiElement = screen.getElement(elementSelector);
 ```
-For more information about getting elements see [How to get element](get-element.md)
+For more information about getting elements see [How to get an element](get-element.md).
 
-After that different gestures can be executed on the select `UiElement`.
-
-
+Different gestures can be executed on the selected `UiElement`:
 
  * **Long press**
 ```java
 uiElement.longPress();
 ```
- It is also possible to give a certain timeout, which the element will be held, or to specify a point from the element to long press.
+ It is also possible to specify the time (in milliseconds) for which the element will be held, or a point of the element to long press.
 ```java
 uiElement.longPress(1000);
 uiElement.longPress(new Point(66, 94), 1000);
@@ -38,16 +34,12 @@ uiElement.tap(new Point(66, 94));
 * **Double tap**
 ```java
 uiElement.doubleTap();
-```
-
- When using double tap, it is possible to specify a point in the `UiElement`.
-```java
-   uiElement.doubleTap(new Point(12, 15));
+uiElement.doubleTap(new Point(12, 15));
 ```
 
 * **Swipe**
 
- `UiElement` can also be swapped, specifying the desired direction.
+ A `UiElement` can be swiped in the specified direction:
 ```java
    uiElement.swipe(SwipeDirection.RIGHT);
 ```
@@ -57,33 +49,29 @@ uiElement.doubleTap();
 uiElement.pinchIn();
 uiElement.pinchOut();
 ```
- >***Note:*** *Emulator devices may not detect pinch gestures on UI elements with size smaller than 100x100dp*.
+ >***Note:*** *Emulator devices may not detect pinch gestures on UI elements with size smaller than 100x100dp.*
 
-* **Clear, select, cut, copy, paste and input text**
- Text in the UI element can be manipulated. For example, let the element selected be a `TextView`.
- Only the attributes of the selector will be changed.
-```java
- elementSelector.addSelectionAttribute(CssAttribute.CLASS_NAME, "android.view.TextView");
-```
+* **Clear, select, cut, copy, paste and input text**  
+ The text of the UI element can be manipulated.
 
- The text in the selected UI element can be cleared
+ For example, the text of the selected UI element could be cleared:
 ```java
    uiElement.clearText();
 ```
- and after that a new text can be set.
+ and then a new text could be set:
 ```java
     uiElement.inputText("Text to input");
 ```
- The user can also specify the timeout in milliseconds between the input of each letter. Using it makes the text input more human like
+ Additionally, the timeout (in milliseconds) between the input of each letter could be set, making the text input more human like:
 ```java
    uiElement.inputText("Text to input", 100);
 ```
-Other possible text operation is cut/copy paste. The steps usually are selecting the text then copy/cut and paste it to the wanted TextField.
+Other possible text operation are cut, copy and paste. The steps usually are selecting the text and then copying/cutting it and pasting it in the desired TextField.
 ```java
  uiElement.selectAllText();
  uiElement.copyText(); //uiElement.cutText();
 
- //Selecting secont TextFiels on Which will copied to the Text
+ //Selecting second TextFiels on Which will copied to the Text
  //Note: The new selector should select unique element otherwisi it will throw exception.
  elementSelector.addSelectionAttribute(CssAttribute.CLASS_NAME, "android.view.TextView");
  UiElement uiElementNewTextView = screen.getUiElement(elementSelector);
@@ -91,7 +79,7 @@ Other possible text operation is cut/copy paste. The steps usually are selecting
  uiElemntNewTextView.pasteText();
 ```
 
->***Note:*** *The user must aware himself that the field is empty before input new text  and the UI       element supports that kind of operations.*
+>***Note:*** *You must assure the field is empty before inputting a new text and the UI element supports that kind of operation.*
 
 * **Focus**
  Focuses the selected UI element.

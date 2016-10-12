@@ -1,14 +1,14 @@
 ## How to use `DatePicker` and `TimePicker`
 
-!DatePicker and !TimePicker give you methods for interacting with Number pickers in Android. Both classes have similar methods the main difference is the type of the picker we want to interact with. With Date and Time pickers we can set or get the picker values.
-Information for How to get Device [Here](get-device.md).  
-Information for How to get Screen [Here](active-screen.md).
+`DatePicker` and `TimePicker` give you methods for interacting with Number pickers in Android. Both classes have similar methods - the main difference is the type of the picker we want to interact with. With Date and Time pickers we can set or get the picker values.  
+*Information about how to get a Device instance can be found [here](get-device.md).*  
+*Information about how to get a Screen instance can be found [here](active-screen.md).*
 
-### Get DatePicker
+### Get a `DatePicker`
 
- 1. Create Screen instance.
- 2. use `screen.getDatePicker()` method for creating a `DatePicker` instance.
-    * Note that in order for `getDatePicker()` method to work there should be **present DatePicker** on the active screen.
+ 1. Create a `Screen` instance.
+ 2. Use the `screen.getDatePicker()` method to create a `DatePicker` instance.
+    * Note that there should be a present `DatePicker` on the active screen for the `getDatePicker()` method to work.
 
 Example code:
 
@@ -16,11 +16,11 @@ Example code:
 DatePicker datePicker = screen.getDatePicker();
 ```
 
-### Get `TimePicker`
+### Get a `TimePicker`
 
- 1. Create Screen instance.
- 2. use `screen.getTimePicker()` method for creating a `TimePicker` instance.
-    *  Note that in order for `getTimePicker()` method to work there should be *present `TimePicker`* on the active screen.
+ 1. Create a `Screen` instance.
+ 2. Use the `screen.getTimePicker()` method to create a `TimePicker` instance.
+    *  Note that there should be a present `TimePicker` on the active screen for the `getTimePicker()` method to work.
 
 Example code:
 
@@ -28,16 +28,14 @@ Example code:
  TimePicker timePicker = screen.getTimePicker();
 ```
 
-### Get `DatePicker` and `TimePicker` Value
+### Get `DatePicker` or `TimePicker` values
 
- 1. Create picker instance the way explained above.
- 2. There are two main methods for getting Date and Time picker.
-    a. `pikcer.getStringValue()` returns string containing the value of the picker.
-    b. `picker.getValue()` returns Calendar instance containing the fields of the picker as integer values.
-       * TimePicker's `getValue()` return Calendar which only Calendar.MINUTES and Calendar.HOUR fields are filled. If the `TimePicker` type is Meridian(am/pm) then the `Calendar.HOUR` is automatically recalculated in 24 format.
-       * DatePikcer's `getValue()` return Calendar which only `Calendar.YEAR`, `Calendar.MONTH` and `Calendar.DAY_OF_MONTH` fields are filled. Additionally there are and get single field methods `getYear()`, `getMonth()` and `getDay()` which return int instances.
+ 1. Create a picker instance.
+ 2. There are two methods for getting Date and Time picker values.
+   * `picker.getStringValue()` returns a `String` containing the value of the picker.
+   * `picker.getValue()` returns a `Calendar` instance containing the fields of the picker as integer values.
 
-Example Code `TimePicker`:
+Example code for a `TimePicker`:
 
 ```java
 TimePicker timePicker = screen.getTimePicker();
@@ -49,7 +47,7 @@ String timeText = timePicker.getStringValue();
 Calendar calendarTimeValue = timePicker.getValue();
 ```
 
-Example Code !DatePicker:
+Example code for a `DatePicker`:
 
 ```java
 DatePicker datePicker = screen.getDatePicker();
@@ -66,12 +64,12 @@ int month = datePicker.getMonth();
 int day = datePicker.getDay();
 ```
 
-### Set `DatePicker` and `TimePicker` Value
+### Set `DatePicker` or `TimePicker` values
 
- 1. Create picker instance explained above.
- 2. Use `picker.setValue(calendar);` for setting the fields.
-    a. For `DatePicker` we need Calendar instance with year, month and day fields filled.
-    b. For `TimePicker` we need Calendar instance with hour and minutes fields filled.
+ 1. Create a picker instance.
+ 2. Use the `picker.setValue(calendar)` method to set the fields.
+   * For the `DatePicker`, the Calendar instance's `year`, `month` and `day` fields must be filled.
+   * For the `TimePicker`, the Calendar instance's `hour` and `minutes` fields must be filled.
 
 Example code:
 
@@ -90,12 +88,12 @@ TimePicker timePicker = screen.getTimePicker();
 timePikcer.setValue(calendar);
 ```
 
-### How to create Calendar for `DatePicker` and `TimePicker` `setValue` method
+### How to create a `Calendar` for the `setValue` method
 
- 1. Create Calendar instance.  `Calendar calendar = Calendar.getInstance();`
- 2. Now that calendar is created we have to set the fields.
-    a. For `DatePicker` use `calendar.set(int year, int month, int date)`. For example `calendar.set(2015, 3, 1)` is the date ''April-1-2015''. Note that date is day of month and month numbers begin from 0 (January is 0).
-    b. For `TimePicker` us `calendar.set(int field, int value)` or `calendar.set(int year, int month, int date, int hour, int minutes)`.
+ 1. Create a `Calendar` instance.  `Calendar calendar = Calendar.getInstance();`
+ 2. Set the required fields.
+   * For the `DatePicker` use `calendar.set(int year, int month, int date)`. For example `calendar.set(2015, 3, 1)` is the date ''April-1-2015''. Note that the day and month values start from 0 (January is 0).
+   * For the `TimePicker` use `calendar.set(int field, int value)` or `calendar.set(int year, int month, int date, int hour, int minutes)`.
 
 Example Code:
 

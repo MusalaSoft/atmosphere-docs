@@ -1,14 +1,16 @@
-## How to Get the Children of an Element ##
+## How to Get the Children of an Element
 
-### Get Children of Element ###
+### Get Children of an Element
 
-There are option for getting Elements that are inside an Element. For example getting an Element that contains text "settings" from Element that contains `FrameLayout`. The children can also be selected by CssQuery, xPath or Element Selector. More information about getting an Element [Here](get-element.md).
+It is possible to get the Elements that are inside a specific Element. The children can be selected by CssQuery, xPath or Element Selector. More information about getting an Element can be found [here](get-element.md).
 
-### Get children by Xpath Query ###
+As an example we will use an Element that contains the text "settings" and is inside an Element of type `FrameLayout`.
 
-   1. Get Element from the Active Screen.
-   2. Create xPathQuery.
-     * How to create xPathQuery explained [Here](create-xpath-and-cssquery.md)
+### Get children by Xpath Query
+
+   1. Get the Element from the Active Screen.
+   2. Create an xPathQuery.
+     * How to create an xPathQuery is explained [here](create-xpath-and-cssquery.md).
    3. Use the method `element.getChildren(xPathQuery)` to get the children.
 
 Example Code:
@@ -24,9 +26,9 @@ List<UiElement> children = element.getChildren(XPATH_QUERY);
 
 ### Get children by `CssQuery` ###
 
-   1. Get Element from the Active Screen.
-   2. Create CSS Query.
-     * How to create `CssQuery` explained [Here](create-xpath-and-cssquery.md)
+   1. Get the Element from the Active Screen.
+   2. Create a CSS Query.
+     * How to create a `CssQuery` is explained [here](create-xpath-and-cssquery.md).
    3. Use the method `element.getChildrenByCssQuery(CssQuery)` to get the children.
 
 Example Code:
@@ -42,12 +44,12 @@ List<UiElement> children = element.getChildren(CSS_QUERY);
 
 ### Get children by Element Selector
 
-   1. Get Element from the Active Screen.
-   2. Create Element Selector.
-     * How to Create Element Selector explained [Here]().
+   1. Get the Element from the Active Screen.
+   2. Create an Element Selector.
+     * How to create an Element Selector is explained [here](create-element-selector.md).
    3. Use the method `element.getChildrenBySelector(ElementSelector)` to get the children.
 
-Example Code
+Example Code:
 
 ```java
 Screen screen = device.getActiveScreen();
@@ -59,6 +61,8 @@ elementChildrenSelector.addSelectionAttribute(CssAttribute.TEXT, "Receive notifi
 List<UiElement> children = element.getChildrenBySelector(elementChildrenSelector);
 ```
 
-### Attributes with which you can Select an Element
+### Attributes with which you can select an Element
 
-You can select an Element with the attributes in `NoteDetails` in the Dump Xml. Every Element has these attributes and can be selected by one or more of them. Also they contained fields like `Enabled`, `Checked`, `Focused` and others. With them we can check if the interactions are successful or not.  For more information you can check [How to dump Xml](xml-dump.md).
+You can select an Element with the attributes in **NoteDetails** in the Dump XML. Every Element has these attributes and can be selected by one or more of them. Also they contain fields like `Enabled`, `Checked`, `Focused` and others. With them we can check if the interactions are successful or not. For more information you can check [How to dump XML](xml-dump.md).
+
+![XML Dump](images/DumpXmlAttributes.jpg)

@@ -1,17 +1,16 @@
-# How to Create Element Selector
+# How to Create an Element Selector
 
-An **ElementSelector** usually contains a **Css Attributes** by which we will **Select an Element from the Active Screen**.
+A `UiElementSelector` usually contains `CssAttributes` by which we will **select a UiElement from the active screen**.
 
-## Create UiElementSelector and add selecting Attributes
+## Create UiElementSelector and add selector Attributes
 
-1. Create `UiElementSelector`.
-2. **Dump the Xml** so you can see all **Elements** and their **CssAttributes** with which an **Element** will be selected.  For more information you can check [How to dump Xml](xml-dump.md).
-2. **Add CssAttributes** to the **ElementSelector** by which the **Element** will be selected.
-  * Note that if there are two or more **Element** that can be selected by the **ElementSelector** and we want only one **Element** an error occurs, so you have to be very specific about the attributes values.
+1. Create a `UiElementSelector`.
+1. **Dump the XML** so you can see all Elements and their `CssAttributes`. For more information you can check [How to dump XML](xml-dump.md).
+1. **Add `CssAttributes`** to the `UiElementSelector` by which the Element will be selected.
+  * Note that if there are two or more `UiElement` objects that can be selected by the `UiElementSelector` and we only need one, an error occurs, so you have to be very specific about the attributes values.
   * You can add more than one attribute to the Selector.
-  * Usually the Element that are on the screen have the same package name but there are many differences like Text, Type, Index etc.
 
-Example code for creating a Selector the created Selector will Select the browser Icon on the home screen of the Device if there is such:
+Example code for creating a `UiElementSelector`:
 
 ```java
 UiElementSelector elementSelector = new UiElementSelector();
@@ -19,9 +18,9 @@ elementSelector.addSelectionAttribute(CssAttribute.CLASS_NAME, "android.widget.T
 elementSelector.addSelectionAttribute(CssAttribute.TEXT, "Browser");
 ```
 
-We can also create `ElementSelector` directly with constructor using **HashMap**. They are strings that contains attributes in text like structure. It is recommended to use `UiElementSelector();`.
+The created Selector will select the browser icon on the home screen of the Device if there is one.
 
-Example code :
+We can also create a `UiElementSelector` directly using the constructor with a `HashMap` with added CSS attributes as Strings to it. Example code:
 
 ```java
 Map<String, String> nodeAttributeMap = new HashMap<>();
@@ -36,4 +35,6 @@ uiElementSelector = new UiElementSelector(nodeAttributeMap);
 
 ## Attributes with which you can Select an Element
 
-You can select an Element with the attributes in **NoteDetails** in the Dump Xml. Every Element has these attributes and can be selected by one or more of them. Also they contained fields like **Enabled**, **Checked**, **Focused** and others. With them we can check if the interactions are successful or not.  For more information you can check [How to dump Xml](xml-dump.md).
+You can select an Element with the attributes in **NoteDetails** in the Dump XML. Every Element has these attributes and can be selected by one or more of them. Also they contain fields like `Enabled`, `Checked`, `Focused` and others. With them we can check if the interactions are successful or not. For more information you can check [How to dump XML](xml-dump.md).
+
+![XML Dump](images/DumpXmlAttributes.jpg)
