@@ -99,8 +99,6 @@
 
 1. Connect a physical device or run an Android emulator.
 
-1. Download [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and unzip it in a convenient directory. Open ```agent.properties``` in the ```atmosphere-agent``` and change the value of the property ```chromedriver.executable.path``` to point to the ChromeDriver executable.
-
 1. In a new Command Prompt/Terminal run the Agent by executing the following command in the `atmosphere-agent` root directory:  
  * ```gradlew run``` (on Windows)
  * ```./gradlew run``` (on Linux/macOS)
