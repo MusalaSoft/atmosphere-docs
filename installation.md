@@ -2,7 +2,6 @@
 ## Prerequisites
 1. [Install JDK and set JAVA_HOME as an Environment variable](/setup/jdk.md)
 1. [Download Android SDK and set ANDROID_HOME as an Environment variable](/setup/android_sdk.md)
-1. [Install Maven and setup the Maven Android SDK Deployer](/setup/maven_android_sdk_deployer.md)
 
 ## ATMOSPHERE
 1. Clone the following repositories from https://github.com/MusalaSoft/:
@@ -48,16 +47,9 @@
   git clone https://github.com/MusalaSoft/atmosphere-server.git
   ```
 
-1. Export the Android SDK library:  
- The `atmosphere-commons` project depends on a library which is part of the Android SDK. The Android SDK license does not allow us to distribute Android SDK libraries separately, so we need to extract the libraries from your local Android SDK installation. You can find instructions on how to do this [here](https://github.com/MusalaSoft/atmosphere-docs/blob/master/setup/maven_android_sdk_deployer.md).
+1. Build and publish each project to your local Maven repository. This can be done with a single command.
 
-1. Following the order of the above list, run:  
- ```gradlew build``` (on Windows) or ```./gradlew build``` (on Linux/macOS),  
- and if the build is successful:  
- ```gradlew publishToMavenLocal``` (on Windows) or ```./gradlew publishToMavenLocal``` (on Linux/macOS)  
- in the root directory of each of the downloaded repositories.
-
- For Windows you can build all project using this single command:
+ For Windows use:
  ```
  cd atmosphere-commons && gradlew build && gradlew publishToMavenLocal && cd .. && ^
  cd atmosphere-agent-device-lib && gradlew build && gradlew publishToMavenLocal && cd .. && ^
@@ -72,7 +64,7 @@
  cd atmosphere-server && gradlew build && gradlew publishToMavenLocal && cd ..
  ```
 
- For Linux/macOS use this command:
+ For Linux/macOS use:
  ```
  cd atmosphere-commons && ./gradlew build && ./gradlew publishToMavenLocal && cd .. && \
  cd atmosphere-agent-device-lib && ./gradlew build && ./gradlew publishToMavenLocal && cd .. && \
@@ -87,13 +79,20 @@
  cd atmosphere-server && ./gradlew build && ./gradlew publishToMavenLocal && cd ..
  ```
 
+ Alternatively you can build each project separately by running in the project's root directory:
+  * ```gradlew build``` (on Windows)
+  * ```./gradlew build``` (on Linux/macOS)  
+ and if the build is successful, you can publish it to you local Maven repository using:
+  * ```gradlew publishToMavenLocal``` (on Windows)
+  * ```./gradlew publishToMavenLocal``` (on Linux/macOS)
+
 1. Run the Server by executing the following command in the `atmosphere-server` root directory:  
  * ```gradlew run``` (on Windows)
  * ```./gradlew run``` (on Linux/macOS)
 
  Wait until you see an output similar to this:
  ```
- >> com.musala.atmosphere.server.state.RunningServer$InnerRunThread.run(RunningServer.java:47) 24 Aug 2016 11:08:49 - Running Server...
+ com.musala.atmosphere.server.state.RunningServer$InnerRunThread.run(RunningServer.java:47) 24 Aug 2016 11:08:49 - Running Server...
  ```
  Leave the Terminal open.
 

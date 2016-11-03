@@ -67,6 +67,16 @@ The Atmosphere tests are extended JUnit tests. Because of this Atmosphere can al
         <version>0.0.1</version>
     </dependency>
     ```
+    * Also add the [jCenter](https://bintray.com/bintray/jcenter) repository inside the `project` tag:
+    ```xml
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <name>jCenter</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+    ```
 1. Update the version of the JUnit library.
     * Open the `pom.xml` file and update the `version` property of the JUnit library to version 4 (or whichever is the latest), for example `4.12`.
     ```xml
@@ -209,11 +219,11 @@ public class AtmosphereSampleTest {
     Builder serverCommunicator = Builder.getInstance();
 
     // Get the device by required parameters
-    Device testDevice = serverCommunicator.getDevice(deviceSelector);
+    testDevice = serverCommunicator.getDevice(deviceSelector);
   }
 
   @After
-  public void tearDown() {
+  public void tearDown() throws DeviceNotFoundException {
 
     // release taken device
     Builder serverCommunicator = Builder.getInstance();
