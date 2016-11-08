@@ -1,4 +1,3 @@
-[![Stories in Backlog](https://badge.waffle.io/MusalaSoft/atmosphere-docs.svg?label=backlog&title=Backlog)](http://waffle.io/MusalaSoft/atmosphere-docs)
 [![Stories in Ready](https://badge.waffle.io/MusalaSoft/atmosphere-docs.svg?label=ready&title=Ready)](http://waffle.io/MusalaSoft/atmosphere-docs)
 [![Stories in In Progress](https://badge.waffle.io/MusalaSoft/atmosphere-docs.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/MusalaSoft/atmosphere-docs)
 # ATMOSPHERE mobile testing framework
