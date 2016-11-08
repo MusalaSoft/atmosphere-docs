@@ -1,3 +1,4 @@
+See our site for better context of this readme. [Click here](http://atmosphereframework.com/)
 See what we are working on now [here](https://waffle.io/MusalaSoft/atmosphere-docs/join)
 
 [![Stories in Ready](https://badge.waffle.io/MusalaSoft/atmosphere-docs.svg?label=ready&title=Ready)](http://waffle.io/MusalaSoft/atmosphere-docs)
