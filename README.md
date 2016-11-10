@@ -6,8 +6,8 @@ See what we are working on now [here](https://waffle.io/MusalaSoft/atmosphere-do
 [![Stories in Ready](https://badge.waffle.io/MusalaSoft/atmosphere-docs.svg?label=ready&title=Ready)](http://waffle.io/MusalaSoft/atmosphere-docs)
 [![Stories in In Progress](https://badge.waffle.io/MusalaSoft/atmosphere-docs.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/MusalaSoft/atmosphere-docs)
 # ATMOSPHERE mobile testing framework
-## Installation instructions
-The instructions for installation could be found [here](installation.md).
+## Setup instructions
+The setup instructions can be found [here](setup.md).
 ## Quick start project
 Find it [here](#atmosphere-tests).
 ## Overview
