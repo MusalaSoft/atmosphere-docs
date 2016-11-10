@@ -25,6 +25,8 @@ Here is a short list of mobile specific things that can be tested with our frame
 
 We really believe we provide a product focused primarily on the specifics of mobile testing, allowing for automating all these weird scenarios that you can not test with any contemporary testing tool. We have already succeeded automating a lot greater percentage of the test scenarios for our own mobile applications than what we were able beforehand.
 
+You can find more information about the supported features [here](features.md).
+
 ## Topology
 The ATMOSPHERE mobile testing framework consists of 4 main topological parts:
 
