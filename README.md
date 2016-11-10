@@ -68,21 +68,31 @@ The Atmosphere tests are extended JUnit tests. Because of this Atmosphere can al
 1. Add the Atmosphere Client library to the `pom.xml` file.
     * Open the `pom.xml` file and add the following dependency inside the `dependencies` tag:
     ```xml
-    <dependency>
-        <groupId>com.musala.atmosphere</groupId>
-        <artifactId>atmosphere-client</artifactId>
-        <version>0.0.1</version>
-    </dependency>
+    <project>
+        ...
+        <dependencies>
+          ...
+          <dependency>
+            <groupId>com.musala.atmosphere</groupId>
+            <artifactId>atmosphere-client</artifactId>
+            <version>0.0.1</version>
+          </dependency>
+        </dependencies>
+    </project>
     ```
     * Also add the [jCenter](https://bintray.com/bintray/jcenter) repository inside the `project` tag:
     ```xml
-    <repositories>
-        <repository>
+    <project>
+        ...
+        <repositories>
+          ...
+          <repository>
             <id>jcenter</id>
             <name>jCenter</name>
             <url>http://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
+          </repository>
+        </repositories>
+    </project>
     ```
 1. Update the version of the JUnit library.
     * Open the `pom.xml` file and update the `version` property of the JUnit library to version 4 (or whichever is the latest), for example `4.12`.
@@ -119,148 +129,66 @@ The following sequence of events represents the life cycle of an Atmosphere test
   - **Important note:** Make sure that you release any allocated devices at the end of your tests! Otherwise when you run your test next time, it may fail due to `NoSuchAvailableDeviceFound` exception, because the server thinks the device is still being used and will wait several minutes before marking it as available for allocation. Everybody who uses the same server would also be unable to get the device until the server timeout is passed.
 
 #### ATMOSPHERE test example
-- Consider the following scenario:
-  - Get running emulator from the server with some characteristics ( RAM, screen, etc... );
-  - Validate its battery level is valid ( between 0 and 101 );
-  - Set it to some user-defined value;
-  - Get the battery level again and verify it's the same as the set.
-- This is one way the work can be done, using one test method to do all the work:
+Consider the following scenario:
+  - Get a device (or an emulator) from the server. Additional parameters can be provided to the `DeviceSelectorBuilder` to select a device with specific characteristics (RAM, screen size, etc...);
+  - Open the Google Play Store app on the device;
+  - Test out all available orientations of the screen with the app opened;
+  - Restore the Portrait screen orientation, close the application and release the device;
+
+This scenario can be accomplished with the following Atmosphere test:
 
 ``` java
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.musala.atmosphere.client.Builder;
 import com.musala.atmosphere.client.Device;
 import com.musala.atmosphere.client.util.Server;
-import com.musala.atmosphere.commons.PowerProperties;
-import com.musala.atmosphere.commons.beans.BatteryLevel;
-import com.musala.atmosphere.commons.cs.deviceselection.DeviceSelector;
+import com.musala.atmosphere.commons.ScreenOrientation;
 import com.musala.atmosphere.commons.cs.deviceselection.DeviceSelectorBuilder;
-import com.musala.atmosphere.commons.cs.deviceselection.DeviceType;
 
-@Server(ip = "10.0.9.35", port = 1980, connectionRetryLimit = 10)
-public class AtmosphereSampleTest {
+@Server(ip = "localhost", port = 1980, connectionRetryLimit = 0)
+public class ChangeOrientationTest {
+    private static final long TIMEOUT_BETWEEN_CHANGES = 2000;
 
-  @Test
-  public void testBattery() throws InterruptedException {
+    private static final long TIMEOUT_BEFORE_CLOSE_APPLICATION = 3000;
 
-    // Setting characteristics of the device we want to get
-    DeviceSelectorBuilder deviceSelectorBuilder = new DeviceSelectorBuilder();
-    DeviceSelector deviceSelector = deviceSelectorBuilder.deviceType(DeviceType.DEVICE_ONLY)
-                                                             .ramCapacity(512)
-                                                             .screenHeight(720)
-                                                             .screenWidth(340)
-                                                             .build();
-    // ...
+    private static final long TIMEOUT_AFTER_START_APPLICATION = 5000;
 
-    // Get the builder instance, which will allocate a device only for us
-    Builder serverCommunicator = Builder.getInstance();
-    // Get the device by required parameters
-    Device testDevice = serverCommunicator.getDevice(deviceSelector);
+    private static Builder testBuilder = Builder.getInstance();
 
-    // we want to test setting/getting of battery level in our device
-    PowerProperties devicePower = testDevice.getPowerProperties();
-    final BatteryLevel actualBatteryLevel = devicePower.getBatteryLevel();
-    assertTrue("Negative battery level !", actualBatteryLevel.getLevel() > 0);
-    assertTrue("Battery level - over 100% !", actualBatteryLevel.getLevel() <= 100);
+    private static Device testDevice;
 
-    PowerProperties userDevicePower = new PowerProperties();
-    userDevicePower.setBatteryLevel(new BatteryLevel(87));
-    testDevice.setPowerProperties(userDevicePower);
+    private static final String PLAYSTORE_PACKAGE_NAME = "com.android.vending";
 
-    // wait some time while the device updates itself
-    Thread.sleep(100);
+    @BeforeClass
+    public static void setUp() throws Exception {
+        DeviceSelectorBuilder selectorBuilder = new DeviceSelectorBuilder();
+        testDevice = testBuilder.getDevice(selectorBuilder.build());
 
-    // validation the operation was done successfully
-    PowerProperties currentDevicePower = testDevice.getPowerProperties();
-    final BatteryLevel currentDeviceBatteryLevel = currentDevicePower.getBatteryLevel();
-    assertEquals("Device battery level differs from the set!", userDevicePower.getBatteryLevel().getLevel(),
-        currentDeviceBatteryLevel.getLevel());
+        testDevice.startApplication(PLAYSTORE_PACKAGE_NAME);
 
-    // Make sure to release allocated devices!
-    serverCommunicator.releaseAllDevices();
-  }
-}
-```
-- This is another example, where `@Before` and `@After` JUnit annotations are used. The test does exactly the same as the one above, just better organized:
+        Thread.sleep(TIMEOUT_AFTER_START_APPLICATION);
+    }
 
-``` java
-package com.musala.atmosphere.client.test.helloworld;
+    @AfterClass
+    public static void cleanUp() throws Exception {
+        testDevice.setScreenOrientation(ScreenOrientation.PORTRAIT);
+        Thread.sleep(TIMEOUT_BEFORE_CLOSE_APPLICATION);
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+        testDevice.forceStopProcess(PLAYSTORE_PACKAGE_NAME);
+        testBuilder.releaseAllDevices();
+    }
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+    @Test
+    public void testAcceleration() throws Exception {
+        for (ScreenOrientation orientation : ScreenOrientation.values()) {
+            testDevice.setScreenOrientation(orientation);
 
-import com.musala.atmosphere.client.Builder;
-import com.musala.atmosphere.client.Device;
-import com.musala.atmosphere.client.util.Server;
-import com.musala.atmosphere.commons.PowerProperties;
-import com.musala.atmosphere.commons.beans.BatteryLevel;
-import com.musala.atmosphere.commons.cs.deviceselection.DeviceSelector;
-import com.musala.atmosphere.commons.cs.deviceselection.DeviceSelectorBuilder;
-import com.musala.atmosphere.commons.cs.deviceselection.DeviceType;
-
-@Server(ip = "10.0.9.35", port = 1980, connectionRetryLimit = 10)
-public class AtmosphereSampleTest {
-
-  private Device testDevice;
-
-  @Before
-  public void setUp() {
-    // Setting characteristics of the device we want to get
-    DeviceSelectorBuilder deviceSelectorBuilder = new DeviceSelectorBuilder();
-    DeviceSelector deviceSelector = deviceSelectorBuilder.deviceType(DeviceType.DEVICE_ONLY)
-                                                             .ramCapacity(512)
-                                                             .screenHeight(720)
-                                                             .screenWidth(340)
-                                                             .build();
-    // ...
-
-    // Get the builder instance, which will allocate a device only for us
-    Builder serverCommunicator = Builder.getInstance();
-
-    // Get the device by required parameters
-    testDevice = serverCommunicator.getDevice(deviceSelector);
-  }
-
-  @After
-  public void tearDown() throws DeviceNotFoundException {
-
-    // release taken device
-    Builder serverCommunicator = Builder.getInstance();
-    serverCommunicator.releaseDevice(testDevice);
-  }
-
-  @Test
-  public void testBattery() throws InterruptedException {
-
-    // we want to test setting/getting of battery level in our device
-    PowerProperties devicePower = testDevice.getPowerProperties();
-    final BatteryLevel actualBatteryLevel = devicePower.getBatteryLevel();
-    assertTrue("Negative battery level !", actualBatteryLevel.getLevel() > 0);
-    assertTrue("Battery level - over 100% !", actualBatteryLevel.getLevel() <= 100);
-
-    PowerProperties userDevicePower = new PowerProperties();
-    userDevicePower.setBatteryLevel(new BatteryLevel(0));
-
-    // apply our properties to the device
-    testDevice.setPowerProperties(userDevicePower);
-
-    // wait some time while the device updates itself
-    Thread.sleep(100);
-
-    // validation the operation was done successfully
-    PowerProperties currentDevicePower = testDevice.getPowerProperties();
-    final BatteryLevel currentDeviceBatteryLevel = currentDevicePower.getBatteryLevel();
-    assertEquals("Device battery level differs from the set!", userDevicePower.getBatteryLevel().getLevel(),
-        currentDeviceBatteryLevel.getLevel());
-  }
+            Thread.sleep(TIMEOUT_BETWEEN_CHANGES);
+        }
+    }
 }
 ```
 
