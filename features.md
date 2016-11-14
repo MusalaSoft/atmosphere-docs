@@ -3,36 +3,36 @@
 ### Overview
 | Feature                    | On emulator   | On real device  | Comments      |
 | -------------------------- |:-------------:|:---------------:|:--------------|
-| getFreeRam()               | ?             | ?               |               |
-| getScreenshot()            | ?             | ?               |               |
-| installApk()               | ?             | ?               |               |
-| startActivity()            | ?             | ?               |               |
-| setAutoRotation()          | ?             | ?               |               |
-| setScreenOrientation()     | ?             | ?               |               |
-| getUiXml()                 | ?             | ?               |               |
-| inputText()                | ?             | ?               |               |
-| setNetworkLatency()        | ?             | ?               |               |
-| setNetworkSpeed()          | ?             | ?               |               |
-| ~~setDeviceOrientation()~~ | ?             | ?               |               |
-| setAcceleration()          | ?             | ?               |               |
-| getPowerState()            | ?             | ?               |               |
-| getBatteryState()          | ?             | ?               |               |
-| getBatteryLevel()          | ?             | ?               |               |
-| setAirplaneMode()          | ?             | ?               |               |
-| getDeviceOrientation()     | ??            | ??              |               |
-| getConnectionType()        | ?             | ?               |               |
-| setBatteryLevel()          | ?             | ?               |On real device, sets the battery level only for limited time|
-| setBatteryState()          | ?             | ?               |On real device, sets the battery state only for limited time|
-| setPowerState()            | ?             | ?               |On real device, sets the power state only for limited time  |
-| getMobileDataState()       | ?             | ?               |               |
-| setMobileDataState()       | ?             | ?               |               |
-| getNetworkSpeed()          | ?              | ?               |               |
-| getNetworkLatency()        | ?              | ?               |               |
-| setWiFi()                  | ?             | ?               |               |
-| setLocked()                | ?             | ??              |               |
-| isAwake()                  | ?             | ?               |               |
-| receiveSms()               | ?             | ?               |               |
-| mockLocation()             | ?             | ?               |               |
+| getFreeRam()               | ✔              | ✔               |               |
+| getScreenshot()            | ✔             | ✔               |               |
+| installApk()               | ✔             | ✔               |               |
+| startActivity()            | ✔             | ✔               |               |
+| setAutoRotation()          | ✔             | ✔               |               |
+| setScreenOrientation()     | ✔             | ✔               |               |
+| getUiXml()                 | ✔             | ✔               |               |
+| inputText()                | ✔             | ✔               |               |
+| setNetworkLatency()        | ✔             | ✘               |               |
+| setNetworkSpeed()          | ✔             | ✘               |               |
+| ~~setDeviceOrientation()~~ | ✔             | ✘               |               |
+| setAcceleration()          | ✔             | ✘               |               |
+| getPowerState()            | ✔             | ✔               |               |
+| getBatteryState()          | ✔             | ✔               |               |
+| getBatteryLevel()          | ✔             | ✔               |               |
+| setAirplaneMode()          | ✔             | ✔               |               |
+| getDeviceOrientation()     | ✔?            | ✔?              |               |
+| getConnectionType()        | ✔             | ✔               |               |
+| setBatteryLevel()          | ✔             | ✔               |On real device, sets the battery level only for limited time|
+| setBatteryState()          | ✔             | ✔               |On real device, sets the battery state only for limited time|
+| setPowerState()            | ✔             | ✔               |On real device, sets the power state only for limited time  |
+| getMobileDataState()       | ✔             | ✘               |               |
+| setMobileDataState()       | ✔             | ✘               |               |
+| getNetworkSpeed()          | ?              | ✔               |               |
+| getNetworkLatency()        | ?              | ✔               |               |
+| setWiFi()                  | ✔             | ✔               |               |
+| setLocked()                | ✔             | ✔?              |               |
+| isAwake()                  | ✔             | ✔               |               |
+| receiveSms()               | ✔             | ✘               |               |
+| mockLocation()             | ✔             | ?               |               |
 
 #### Legend:
 |sign   | description      |
