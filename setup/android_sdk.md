@@ -12,18 +12,9 @@ After the SDK Manager finishes loading install the following components:
 
  * **Android SDK Tools**
  * **Android SDK Platform-tools**
- * **Android SDK Build-tools** - `v23.0.3`
- * **Android 4.4.2 (API 19)**:
+ * **Android SDK Build-tools** - `v25`
+ * **Android 7.1.1 (API 25)**:
    * **SDK Platform**
-   * **Google APIs**
- * **Android 4.2.2 (API 17)**:
-   * **SDK Platform**
-   * **Google APIs**
- * If you plan to work on the Android applications, you may also download the remaining SDK Platforms for API 17 up until the latest.
- * **Extras**:
-   * **Android Support Repository**
-   * **Google USB Driver** (_Windows_ only.)
-   * **Intel x86 Emulator Accelerator (HAXM installer)** (_Windows_ only. Greatly increases the Android emulator speed when run with Intel emulator system images.)
 
 ## Set ANDROID_HOME
 After the Android SDK is ready to use, you need to set a system path variable pointing to the Android SDK directory.
