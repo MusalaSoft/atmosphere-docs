@@ -1,46 +1,46 @@
 ## ATMOSPHERE Features for emulators and real devices overview
 
 ### Overview
-| Feature                    | On emulator   | On real device  | Comments      |
-| -------------------------- |:-------------:|:---------------:|:--------------|
-| getFreeRam()               | ?             | ?               |               |
-| getScreenshot()            | ?             | ?               |               |
-| installApk()               | ?             | ?               |               |
-| startActivity()            | ?             | ?               |               |
-| setAutoRotation()          | ?             | ?               |               |
-| setScreenOrientation()     | ?             | ?               |               |
-| getUiXml()                 | ?             | ?               |               |
-| inputText()                | ?             | ?               |               |
-| setNetworkLatency()        | ?             | ?               |               |
-| setNetworkSpeed()          | ?             | ?               |               |
-| ~~setDeviceOrientation()~~ | ?             | ?               |               |
-| setAcceleration()          | ?             | ?               |               |
-| getPowerState()            | ?             | ?               |               |
-| getBatteryState()          | ?             | ?               |               |
-| getBatteryLevel()          | ?             | ?               |               |
-| setAirplaneMode()          | ?             | ?               |               |
-| getDeviceOrientation()     | ??            | ??              |               |
-| getConnectionType()        | ?             | ?               |               |
-| setBatteryLevel()          | ?             | ?               |On real device, sets the battery level only for limited time|
-| setBatteryState()          | ?             | ?               |On real device, sets the battery state only for limited time|
-| setPowerState()            | ?             | ?               |On real device, sets the power state only for limited time  |
-| getMobileDataState()       | ?             | ?               |               |
-| setMobileDataState()       | ?             | ?               |               |
-| getNetworkSpeed()          | ?              | ?               |               |
-| getNetworkLatency()        | ?              | ?               |               |
-| setWiFi()                  | ?             | ?               |               |
-| setLocked()                | ?             | ??              |               |
-| isAwake()                  | ?             | ?               |               |
-| receiveSms()               | ?             | ?               |               |
-| mockLocation()             | ?             | ?               |               |
+|Feature                        | Method                     | On emulator   | On real device  | Comments      |
+|---------------------          | -------------------------- |:-------------:|:---------------:|:--------------|
+|get the free RAM               | getFreeRam()               | ✔             | ✔               |               |
+|get a screenshots              | getScreenshot()            | ✔             | ✔               |               |
+|install an APK                 | installApk()               | ✔             | ✔               |               |
+|start an activity              | startActivity()            | ✔             | ✔               |               |
+|set an auto-rotation           | setAutoRotation()          | ✔             | ✔               |               |
+|set a screen orientation       | setScreenOrientation()     | ✔             | ✔               |               |
+|get an XML from the UI         | getUiXml()                 | ✔             | ✔               |               |
+|input a text                   | inputText()                | ✔             | ✔               |               |
+|set a network latency          | setNetworkLatency()        | ✔             | ✘               |               |
+|set a network speed            | setNetworkSpeed()          | ✔             | ✘               |               |
+|set a device orientation       | ~~setDeviceOrientation()~~ | ✔             | ✘               |               |
+|set an acceleration            | setAcceleration()          | ✔             | ✘               |               |
+|get a power state              | getPowerState()            | ✔             | ✔               |               |
+|get a battery state            | getBatteryState()          | ✔             | ✔               |               |
+|get a battery level            | getBatteryLevel()          | ✔             | ✔               |               |
+|set an airplane mode           | setAirplaneMode()          | ✔             | ✔               |               |
+|get a device orientation       | getDeviceOrientation()     | ✔?            | ✔?              |               |
+|get a connection type          | getConnectionType()        | ✔             | ✔               |               |
+|set a battery level            | setBatteryLevel()          | ✔             | ✔               |On real device, sets the battery level only for limited time|
+|set a battery state            | setBatteryState()          | ✔             | ✔               |On real device, sets the battery state only for limited time|
+|set a power state              | setPowerState()            | ✔             | ✔               |On real device, sets the power state only for limited time  |
+|get a mobile data state        | getMobileDataState()       | ✔             | ✘               |               |
+|set a mobile data state        | setMobileDataState()       | ✔             | ✘               |               |
+|get a network speed            | getNetworkSpeed()          | ?              | ?               |               |
+|get a network latency          | getNetworkLatency()        | ?              | ?               |               |
+|set an WiFi                    | setWiFi()                  | ✔             | ✔               |               |
+|lock a device                  | setLocked()                | ✔             | ✔?              |               |
+|awake a device                 | isAwake()                  | ✔             | ✔               |               |
+|receive a SMS                  | receiveSms()               | ✔             | ✘               |               |
+|mock location on device        | mockLocation()             | ✔             | ✔               |               |
 
 #### Legend:
 |sign   | description      |
 |---|----------------------|
-|?  | fully working|
-|?? | unrealiable |
+|✔  | fully working|
+|✔? | unrealiable |
 |?  | unknown |
-|? | missing |
+|✘ | missing |
 |blank|  not possible |
 
 ### Features that work on both real devices and emulators
