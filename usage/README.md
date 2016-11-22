@@ -10,6 +10,7 @@ In this guide we cover how to use the basic capabilities of the ATMOSPHERE mobil
 * [Get Children of Element](get-children.md)
 * [Get Device](get-device.md)
 * [Get Element](get-element.md)
+* [Location Mocking](location-mocking.md)
 * [Notification Bar Usage](notification-bar.md)
 * [Scrollable View Usage](scrollable-view.md)
 * [Sensors Usage](sensors-usage.md)
