@@ -10,9 +10,9 @@
  * `gradlew --console plain runServer` (on Windows)
  * `./gradlew --console plain runServer` (on Linux/macOS)
 
- Wait until you see an output similar to this:
+ Wait until you see the following output:
  ```
- com.musala.atmosphere.server.state.RunningServer$InnerRunThread.run(RunningServer.java:47) 24 Aug 2016 11:08:49 - Running Server...
+ The Server has started successfully.
  ```
 
  Leave the Terminal open.
@@ -23,9 +23,10 @@
  * `gradlew --console plain runAgent` (on Windows)
  * `./gradlew --console plain runAgent` (on Linux/macOS)
 
- Wait until you see an output similar to this:  
+ Wait until you see an output similar to this:
  ```
- com.musala.atmosphere.agent.AgentManager.createWrapperForDevice(AgentManager.java:378) 24 Aug 2016 12:53:43 - Created wrapper for device with bindingId = 0149BCA70C01D00F
+ Connection to server established.
+ Server with IP (169.254.228.9:1980) registered.
  ```
 
 You are now set to [run Atmosphere tests](https://github.com/MusalaSoft/atmosphere-docs#atmosphere-tests).
