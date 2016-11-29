@@ -15,5 +15,6 @@ In this guide we cover how to use the basic capabilities of the ATMOSPHERE mobil
 * [Scrollable View Usage](scrollable-view.md)
 * [Sensors Usage](sensors-usage.md)
 * [UiElement Usage](ui-element.md)
+* [Parallel testing](parallel-testing.md)
 * [Xml Dump](xml-dump.md)
 * [Debugging a Gradle project with Eclipse](gradle-debug-in-eclipse.md)
