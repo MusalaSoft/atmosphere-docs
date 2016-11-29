@@ -50,7 +50,6 @@
 * setAutoRotation()
 * setScreenOrientation();
 * getUiXml();
-* record macro;
 * inputText();
 * setAirplaneMode();
 
