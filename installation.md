@@ -92,7 +92,9 @@
 
  Wait until you see an output similar to this:
  ```
- com.musala.atmosphere.server.state.RunningServer$InnerRunThread.run(RunningServer.java:47) 24 Aug 2016 11:08:49 - Running Server...
+ ...
+ >> 05 XII 2016 15:21:05 - Running Server...
+The Server has started successfully.
  ```
  Leave the Terminal open.
 
@@ -104,7 +106,10 @@
 
  Wait until you see an output similar to this:  
  ```
- com.musala.atmosphere.agent.AgentManager.createWrapperForDevice(AgentManager.java:378) 24 Aug 2016 12:53:43 - Created wrapper for device with bindingId = 0149BCA70C01D00F
+ ...
+ 05 XII 2016 15:36:03 - Agent created on port: 1989
+ The Agent has started successfully.
+>>
  ```
 
 1. Connect the Agent to the Server by running ```connect <port>``` in the Agent Terminal. By default the Server port is set to ```1980```. It could be changed by editing the ```pool.manager.rmi.port``` property in the ```server.properties``` file in the ```atmosphere-server``` root directory.
