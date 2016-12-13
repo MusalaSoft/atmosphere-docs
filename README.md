@@ -59,9 +59,12 @@ The code that needs to be deployed on the device is separated in multiple applic
  * **atmosphere-uiautomator-bridge** - this is a special project that is not deployed as a proper Android project. It is a Java library and it provides some missing Android classes on older Android API levels and an additional socket for communication between the agent and the target device. When it is deployed on the target device, the agent can recognize the service and connect to its socket.
 
 ## ATMOSPHERE Tests
-The Atmosphere tests are extended JUnit tests. Because of this Atmosphere can also be integrated with  [TestNG][1], in a way JUnit is. The classes with test methods are annotated with Atmosphere annotation (`@Server`) , which defines the properties of the server connection. The Atmosphere test methods must be annotated with the JUnit `@Test` annotation. Executing Atmosphere tests is done like running JUnit tests.
+The Atmosphere tests are extended JUnit tests. Because of this, Atmosphere can also be integrated with [TestNG][1] in a way JUnit is. The classes with test methods are annotated with Atmosphere annotation (`@Server`), which defines the properties of the server connection. The Atmosphere test methods use the JUnit `@Test` annotation. Executing Atmosphere tests is done the same way JUnit tests are run.
+
+The Atmosphere framework can also be used with other unit testing frameworks (and other programming languages) which don't support annotations. The server connection properties can be provided using a `ServerConnectionProperties` instance. You can find quick start examples for Java and JRuby below.
 
 ### Creating a project
+#### Java
 1. Create a new Maven project.
     * This can be done by right-clicking on the white space under the Package Explorer tab in Eclipse IDE and clicking `New` -> `Maven Project`. If the Maven Project option is not visible, select `Other...` and then find `Maven Project` under the Maven folder.
     * Click `Next` and choose a Workspace location. You may also select the `Create a simple project` option if you don't have a specific archetype in mind and just want to try out the Atmosphere framework. Click `Next`.
@@ -106,28 +109,80 @@ The Atmosphere tests are extended JUnit tests. Because of this Atmosphere can al
     </dependency>
     ```
 
-### Creating an ATMOSPHERE test class
-1. Create a new class (for this example let's name it `AtmosphereTestCase`)
-1. Add a `@Server` annotation to the `AtmosphereTestCase` class. (The annotation is located in the `atmosphere-client` library). The annotation is used for connection with the Atmosphere server. For example:
+#### JRuby
+You can use a gem like [jBundler](https://github.com/mkristian/jbundler) to resolve Maven dependencies:
 
-```
-@Server(ip = "10.0.9.35", port = 1980, connectionRetryLimit = 10)
-public class AtmosphereHelloWorldTest {...}
-```
+ 1. Install the jBundler gem:
+
+ ```
+ jruby -S gem install jbundler
+ ```
+
+ 1. Create a `Jarfile` in a directory you will use as a project directory and add the jCenter repository and the Atmosphere Client library dependency to it:
+
+ ```
+ repository "https://jcenter.bintray.com"
+
+ jar 'com.musala.atmosphere:atmosphere-client', '0.0.1'
+ ```
+
+ 1. Make jBundler download the dependencies:
+
+ ```
+ jruby -S jbundle install
+ ```
+
+### Creating an ATMOSPHERE test class
+#### Java
+
+1. Create a new class and add a `@Server` annotation to it. The annotation provides the properties needed for the connection to the Atmosphere Server. The annotation is located in the `atmosphere-client` library. For example:
+
+ ```java
+ @Server(ip = "10.0.9.35", port = 1980, connectionRetryLimit = 10)
+ public class AtmosphereHelloWorldTest {...}
+ ```
+
 1. Populate all 3 fields of the `@Server` with appropriate values as follows:
- - **ip** - the ip of the server, represented as string
+ - **ip** - the IP address of the server, represented as a String
  - **port** - integer, representing the port in the server's address
- - **connectionRetryLimit** - integer, representing the numbers of retries which should be made in case the connection with the Server breaks.
+ - **connectionRetryLimit** - integer, representing the numbers of retries which should be made in case the connection with the server breaks.
+
+#### JRuby
+1. Create a Ruby file and add the following lines:
+
+ ```ruby
+ require 'java'
+ require 'jbundler'
+ require 'minitest/autorun'
+ ```
+
+ * `require 'java'` will give you access to any bundled Java libraries (classes within your java class path).
+ * `require 'jbundler'` will add all jar dependencies from the jBundler's `Jarfile` (configured in the previous section) to your class path.
+ * `require 'minitest/autorun'` will give you access to the Minitest unit testing framework which we will be using in this example.
+1. Create a new class and make it inherit from `Minitest::Test`.
+1. Provide the server connection properties. You will need a `ServerConnectionProperties` instance, so `java_import` it first. The file should look similar to this:
+
+ ```ruby
+ require 'java'
+ require 'jbundler'
+ require 'minitest/autorun'
+
+ java_import "com.musala.atmosphere.client.util.ServerConnectionProperties"
+
+ class TestAtmosphereHelloWorld < Minitest::Test
+     @@connection_properties = ServerConnectionProperties.new("localhost", 1980, 0)
+ end
+ ```
 
 ### Creating an ATMOSPHERE test case
-Atmosphere test cases are methods, annotated with the JUnit `@Test` annotation where the Atmosphere Client API is used.
+The Atmosphere test cases are unit testing methods which use the Atmosphere Client API.
 
 #### Lifecycle of an ATMOSPHERE test
 The following sequence of events represents the life cycle of an Atmosphere test:
- 1. Connect to an Atmosphere server - the server divides all usable devices among all clients
- 1. Allocate appropriate device(s) - the client reserves himself or herself one or more of the usable devices on the server, on which they will run their tests
- 1. Run test(s) - the tests are executed on the allocated from the previous step devices
- 1. Release devices - by releasing, the client tells the server that their reserved devices are no longer needed and can be provided to other clients.
+ 1. Connect to an Atmosphere server - the server divides all usable devices among all clients.
+ 1. Allocate appropriate device(s) - the client reserves themself one or more of the usable devices on the server, which they will run their tests on.
+ 1. Run test(s) - the tests are executed on the allocated from the previous step devices.
+ 1. Release the devices - by releasing, the client tells the server that their reserved devices are no longer needed and can be provided to other clients.
   - **Important note:** Make sure that you release any allocated devices at the end of your tests! Otherwise when you run your test next time, it may fail due to `NoSuchAvailableDeviceFound` exception, because the server thinks the device is still being used and will wait several minutes before marking it as available for allocation. Everybody who uses the same server would also be unable to get the device until the server timeout is passed.
 
 #### ATMOSPHERE test example
@@ -138,6 +193,7 @@ Consider the following scenario:
   - Restore the Portrait screen orientation, close the application and release the device;
 
 This scenario can be accomplished with the following Atmosphere test:
+##### Java
 
 ``` java
 import org.junit.AfterClass;
@@ -192,6 +248,56 @@ public class ChangeOrientationTest {
         }
     }
 }
+```
+
+##### JRuby
+
+```ruby
+require 'java'
+require 'jbundler'
+require 'minitest/autorun'
+
+java_import "com.musala.atmosphere.client.util.ServerConnectionProperties"
+java_import "com.musala.atmosphere.client.Builder"
+java_import "com.musala.atmosphere.commons.ScreenOrientation"
+java_import "com.musala.atmosphere.commons.cs.deviceselection.DeviceSelectorBuilder"
+
+class TestChangeOrientation < Minitest::Test
+   @@connection_properties = ServerConnectionProperties.new("localhost", 1980, 0)
+
+   @@timeout_between_changes = 2
+
+   @@timeout_after_start_application = 5
+
+   @@timeout_before_close_application = 3
+
+   @@playstore_package_name = "com.android.vending"
+
+   def setup
+       selector_builder = DeviceSelectorBuilder.new
+       @test_builder = Builder.getInstance(@@connection_properties)
+       @test_device = @test_builder.getDevice(selector_builder.build)
+
+       @test_device.startApplication(@@playstore_package_name)
+
+       sleep(@@timeout_after_start_application)
+   end
+
+   def teardown
+       @test_device.setScreenOrientation(ScreenOrientation::PORTRAIT)
+       sleep(@@timeout_before_close_application)
+       @test_device.forceStopProcess(@@playstore_package_name)
+       @test_builder.releaseAllDevices
+   end
+
+   def test_acceleration
+       for orientation in ScreenOrientation.values
+           @test_device.setScreenOrientation(orientation)
+
+           sleep(@@timeout_between_changes)
+       end
+   end
+end
 ```
 
 #### More examples
