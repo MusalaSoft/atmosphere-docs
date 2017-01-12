@@ -65,6 +65,16 @@ The Atmosphere framework can also be used with other unit testing frameworks (an
 
 ### Creating a project
 #### Java
+
+The easiest way to start a test project is to use the Atmosphere test Maven archetype by adding a remote catalog:
+* Right-click on the white space under the Package Explorer tab in Eclipse IDE and clicking `New` -> `Maven Project`. If the Maven Project option is not visible, select `Other...` and then find `Maven Project` under the Maven folder.
+* Click `Next` and choose a Workspace location. Uncheck the `Create a simple project` option if is checked. Click `Next`.
+* Click `Configure` then `Add Remote Catalog`. Add this archetype catalog url: `https://dl.bintray.com/musala/atmosphere/`. Optionaly you can write a description. Save the preferences.
+* Select the desired archetype(`atmosphere-test-template`) and click `Next`.
+* Specify the properties of the Maven Project and click `Finish`. A project with an example JUnit test class will be created.
+
+Another option is to create a plain Maven project and put the dependencies manually:
+
 1. Create a new Maven project.
     * This can be done by right-clicking on the white space under the Package Explorer tab in Eclipse IDE and clicking `New` -> `Maven Project`. If the Maven Project option is not visible, select `Other...` and then find `Maven Project` under the Maven folder.
     * Click `Next` and choose a Workspace location. You may also select the `Create a simple project` option if you don't have a specific archetype in mind and just want to try out the Atmosphere framework. Click `Next`.
