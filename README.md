@@ -310,8 +310,8 @@ class TestChangeOrientation < Minitest::Test
 end
 ```
 
-#### More examples
-More usage scenarios are available [here][2]
+### More examples
+More usage scenarios are available [here][2].
 
 ### Running an ATMOSPHERE test case
 Running Atmosphere Test cases is done in the same way as running any other JUnit test case. You should right click on the test class. Click on `Run As` -> `JUnit Test Case` or `Run As` -> `Run Configurations` and select the proper configurations for a JUnit test.
