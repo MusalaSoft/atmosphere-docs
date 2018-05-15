@@ -32,17 +32,17 @@ The ATMOSPHERE mobile testing framework consists of 4 main topological parts:
 
 ### Agent
 The agent is responsible for establishing and maintaining the connection with specific devices. It acts as a middleman between the server and the mobile devices. The project of the agent is implemented as Java Project and consists of the following projects:
- * atmosphere-agent
- * atmosphere-server-agent-lib
- * atmosphere-agent-device-lib
- * atmosphere-commons
+ * [atmosphere-agent](https://github.com/MusalaSoft/atmosphere-agent)
+ * [atmosphere-server-agent-lib](https://github.com/MusalaSoft/atmosphere-server-agent-lib)
+ * [atmosphere-agent-device-lib](https://github.com/MusalaSoft/atmosphere-agent-device-lib)
+ * [atmosphere-commons](https://github.com/MusalaSoft/atmosphere-commons)
 
 ### Server
 This is the interface the clients speak to. It establishes connections to agents and uses their set of devices to serve client requests. It is the part of the project that defines the methods exposed to the end clients. The project of the server is implemented as Java Project and consists of the following projects:
-* atmosphere-server
-* atmosphere-server-agent-lib
-* atmosphere-client-server-lib
-* atmosphere-commons
+* [atmosphere-server](https://github.com/MusalaSoft/atmosphere-server)
+* [atmosphere-server-agent-lib](https://github.com/MusalaSoft/atmosphere-server-agent-lib)
+* [atmosphere-client-server-lib](https://github.com/MusalaSoft/atmosphere-client-server-lib)
+* [atmosphere-commons](https://github.com/MusalaSoft/atmosphere-commons)
 
 The code is developed in such a way that the server does not necessarily live on the same machine the agent does.
 
