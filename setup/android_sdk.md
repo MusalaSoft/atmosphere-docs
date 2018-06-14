@@ -1,20 +1,22 @@
 # Android SDK setup instructions
 ## Android SDK
 If you already have Android Studio installed, most likely you also have Android SDK. If you don't have a local Android SDK installation, you can download it from [here](https://developer.android.com/studio/index.html#downloads).
-You don't need the whole bundle, so look for files whose names start with `android-sdk_` and choose the one appropriate for your system. Extract the archive to a suitable location after the download is complete.
+You don't need the whole bundle, so look for files whose names start with `sdk-tools-` and choose the one appropriate for your system. Extract the archive to a suitable location after the download is complete. For example, `%userprofile%\android-sdk\` (for Windows) or `~/android-sdk/` (for Linux/macOS).
 
-Start the SDK Manager.  
+You will need the following packages:
 
-* **Windows** Run `SDK Manager.exe` in the main SDK directory.  
-* **Linux/macOS** Run `android` in `[android-sdk]/tools`
+* **Android SDK Tools**
+* **Android SDK Platform-tools**
+* **Android SDK Build-tools** - `v25`
+* **Android 7.1.1 (API 25)**:
+  * **SDK Platform**
 
-After the SDK Manager finishes loading install the following components:
+If you are using Android Studio, you can use the integrated SDK Manager to download and install them. You can then skip to the [Set ANDROID_HOME](#set-android_home) section below. If not, you can use the command line tools you downloaded earlier. The following steps are for the command line tools only.
 
- * **Android SDK Tools**
- * **Android SDK Platform-tools**
- * **Android SDK Build-tools** - `v25`
- * **Android 7.1.1 (API 25)**:
-   * **SDK Platform**
+Go to `tools/bin/` and install the required packages:
+
+* **Windows** Run `sdkmanager.bat "tools" "platform-tools" "build-tools;25.0.0" "platforms;android-25"`
+* **Linux/macOS** Run `./sdkmanager "tools" "platform-tools" "build-tools;25.0.0" "platforms;android-25"`
 
 ## Set ANDROID_HOME
 After the Android SDK is ready to use, you need to set a system path variable pointing to the Android SDK directory.
