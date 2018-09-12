@@ -2,6 +2,6 @@ language: ruby
 rvm: 2.2
 before_script: gem install awesome_bot
 script: 
-    - awesome_bot --allow-dupe --allow-redirect *.md --white-list atmosphereframework.com
+    - awesome_bot --allow-dupe --allow-redirect *.md --white-list maven.apache.org/POM/4.0.0,waffle.io/MusalaSoft/atmosphere-docs/join
     - awesome_bot --allow-dupe --allow-redirect setup/*.md --white-list oracle.com
     - awesome_bot --allow-dupe --allow-redirect usage/*.md --white-list http://.../home.html
